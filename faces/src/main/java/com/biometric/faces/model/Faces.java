@@ -19,8 +19,8 @@ public class Faces {
     private String companyName;
     private String modelName;
     private String modelCode;
-    private double Price;
-    private double Accuracy;
+    private double price;
+    private double accuracy;
     private double energyConsumption;
     private String technology;
     private double speed;
