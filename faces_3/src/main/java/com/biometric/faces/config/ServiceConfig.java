@@ -1,4 +1,4 @@
-﻿package com.biometric.faces.config;
+package com.biometric.faces.config;
 
 import lombok.Getter;
 import lombok.Setter;

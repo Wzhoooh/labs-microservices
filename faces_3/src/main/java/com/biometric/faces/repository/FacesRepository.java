@@ -1,4 +1,4 @@
-﻿package com.biometric.faces.repository;
+package com.biometric.faces.repository;
 
 import com.biometric.faces.model.Faces;
 import org.springframework.data.repository.CrudRepository;
@@ -12,5 +12,6 @@ public interface FacesRepository extends CrudRepository<Faces,String> {
     public Fractures findByHospitalNameAndBoneType
             (String hospitalName,
              String boneType);*/
-    public List<Faces> findByCompanyNameAndPrice(String companyName, double price);
+    public List<Faces> findByCompanyNameAndPriceLessThanEqual(String companyName, double price);
+    public Faces findByCompanyNameAndModelName(String companyName, String modelName);
 }

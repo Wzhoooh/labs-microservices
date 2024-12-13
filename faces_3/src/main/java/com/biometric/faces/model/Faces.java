@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Setter
 @ToString
 @Entity
-@Table(name="face_rec_terminals")
+@Table(name="face_rec_terminals_info")
 public class Faces /*extends RepresentationModel<Faces>*/ {
     @Column(name = "company_name", nullable = false)
     private String companyName;

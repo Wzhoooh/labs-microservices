@@ -1,4 +1,4 @@
-﻿package com.biometric.faces.model;
+package com.biometric.faces.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -37,7 +37,8 @@ public class FacesService {
             faces.setCompanyName(companyName);
             facesRepository.save(faces);
         }
-
+        String comment = config.getProperty();
+        System.out.println("Setting comment: " + comment);
         return faces.withComment(config.getProperty());
     }
 
@@ -55,7 +56,7 @@ public class FacesService {
 
         return terminal;*/
 
-        List<Faces> terminals = facesRepository.findByCompanyNameAndPrice(companyName, price);
+        List<Faces> terminals = facesRepository.findByCompanyNameAndPriceLessThanEqual(companyName, price);
         if (terminals == null) {
             throw new IllegalArgumentException(String.format(messages.getMessage("faces.search.error.message", null, null), price,
                     companyName));
@@ -65,9 +66,9 @@ public class FacesService {
         }
         FacesStringList flist = new FacesStringList();
         flist.setFacesList(terminals);
-        String resp = "\n";
+        String resp = " ";
         for (int i = 0; i < terminals.size(); i++) {
-            resp += String.format("%s \n", terminals.get(i).toString());
+            resp += String.format("%s ;", terminals.get(i).toString());
         }
         flist.setStringFacesList(String.format(messages.getMessage("faces.get.message", null, locale),
                 resp));
@@ -99,12 +100,12 @@ public class FacesService {
 
     public String deleteFaces(String companyName, String modelName, Locale locale) {
         String responseMessage = null;
-        Faces terminal = new Faces();
-        terminal.setCompanyName(companyName);
-        terminal.setModelName(modelName);
-        facesRepository.delete(terminal);
-        responseMessage = String.format(messages.getMessage("faces.delete.message", null, locale),
-                modelName, companyName);
+        Faces terminal = facesRepository.findByCompanyNameAndModelName(companyName, modelName);
+        if (terminal != null) {
+            facesRepository.delete(terminal);
+            responseMessage = String.format(messages.getMessage("faces.delete.message", null, locale),
+                    modelName, companyName);
+        }
 
         return responseMessage;
     }
